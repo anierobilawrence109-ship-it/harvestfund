@@ -1,0 +1,200 @@
+/* =========================================
+   HARVESTFUND HISTORY PAGE
+========================================= */
+
+.history-page {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+
+  background: #07111f;
+  color: #ffffff;
+
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.history-sidebar {
+  flex: 0 0 250px;
+  width: 250px;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.history-content {
+  flex: 1;
+  min-width: 0;
+
+  width: calc(100% - 250px);
+
+  padding: 35px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE TITLE
+========================================= */
+
+.history-content h1 {
+  margin: 0 0 30px;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* =========================================
+   SERVER MESSAGE
+========================================= */
+
+.history-content > p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   HISTORY CARD
+========================================= */
+
+.history-card {
+  width: 100%;
+  max-width: 700px;
+
+  padding: 22px;
+  margin-bottom: 15px;
+
+  background: #0d1b2a;
+
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #22c55e;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   CARD TITLE
+========================================= */
+
+.history-card h3 {
+  margin: 0 0 15px;
+
+  color: #4ade80;
+
+  font-size: 19px;
+}
+
+/* =========================================
+   CARD DETAILS
+========================================= */
+
+.history-card p {
+  margin: 8px 0;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .history-sidebar {
+    flex: 0 0 220px;
+    width: 220px;
+  }
+
+  .history-content {
+    width: calc(100% - 220px);
+    padding: 25px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .history-page {
+    display: block;
+  }
+
+  .history-sidebar {
+    width: 0;
+    flex: none;
+  }
+
+  .history-content {
+    width: 100%;
+
+    padding: 20px;
+    padding-bottom: 90px;
+  }
+
+  .history-content h1 {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  .history-card {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .history-content {
+    padding: 15px;
+    padding-bottom: 90px;
+  }
+
+  .history-content h1 {
+    font-size: 23px;
+  }
+
+  .history-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .history-card h3 {
+    font-size: 17px;
+  }
+
+}

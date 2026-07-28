@@ -1,0 +1,169 @@
+/* =========================================
+   HARVESTFUND PREMIUM NAVBAR
+========================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 18px 7%;
+
+  box-sizing: border-box;
+
+  background: rgba(7, 17, 31, 0.92);
+
+  border-bottom: 1px solid #1e293b;
+
+  backdrop-filter: blur(15px);
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+  font-weight: 800;
+
+  text-decoration: none;
+
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  font-size: 25px;
+}
+
+/* =========================================
+   NAVIGATION LINKS
+========================================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #94a3b8;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #4ade80;
+}
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.nav-links .login-btn {
+  padding: 10px 20px;
+
+  color: #e2e8f0;
+
+  border: 1px solid #334155;
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  transition:
+    all 0.2s ease;
+}
+
+.nav-links .login-btn:hover {
+  color: #4ade80;
+
+  border-color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.06);
+}
+
+/* =========================================
+   SIGN UP BUTTON
+========================================= */
+
+.nav-links .signup-btn {
+  padding: 11px 20px;
+
+  color: #ffffff;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #22c55e,
+      #15803d
+    );
+
+  box-shadow:
+    0 6px 18px
+    rgba(34, 197, 94, 0.15);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-links .signup-btn:hover {
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px
+    rgba(34, 197, 94, 0.25);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .navbar {
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-links a:not(.login-btn):not(.signup-btn) {
+    display: none;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .nav-links .login-btn,
+  .nav-links .signup-btn {
+    padding: 9px 13px;
+
+    font-size: 12px;
+  }
+
+}

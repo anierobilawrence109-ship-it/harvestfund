@@ -1,0 +1,340 @@
+/* =========================================
+   HARVESTFUND INVESTMENTS PAGE
+========================================= */
+
+.investments-page {
+  min-height: 100vh;
+  background: #07111f;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.investments-content {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  min-height: 100vh;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(34, 197, 94, 0.08),
+      transparent 30%
+    ),
+    #07111f;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.investments-content > h1 {
+  margin: 0 0 10px;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.investments-content > p {
+  margin: 0 0 30px;
+
+  color: #4ade80;
+
+  font-size: 14px;
+}
+
+/* =========================================
+   INVESTMENT PLANS GRID
+========================================= */
+
+.investment-card {
+  position: relative;
+
+  padding: 25px;
+
+  margin-bottom: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d1b2a,
+      #091522
+    );
+
+  border: 1px solid #1e293b;
+
+  border-radius: 20px;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* =========================================
+   PLAN CARD HOVER
+========================================= */
+
+.investment-card:hover {
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(34, 197, 94, 0.5);
+
+  box-shadow:
+    0 15px 35px
+    rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   PLAN TITLES
+========================================= */
+
+.investment-card h2 {
+  margin: 0 0 20px;
+
+  color: #ffffff;
+
+  font-size: 22px;
+}
+
+.investment-card h3 {
+  margin: 0 0 18px;
+
+  color: #ffffff;
+
+  font-size: 20px;
+}
+
+/* =========================================
+   PLAN INFORMATION
+========================================= */
+
+.investment-card p {
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  margin: 10px 0;
+}
+
+.investment-card p strong {
+  color: #cbd5e1;
+}
+
+/* =========================================
+   INVEST BUTTON
+========================================= */
+
+.investment-card button {
+  width: 100%;
+
+  padding: 14px 20px;
+
+  margin-top: 15px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #22c55e,
+      #15803d
+    );
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.investment-card button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px
+    rgba(34, 197, 94, 0.25);
+}
+
+/* =========================================
+   SEPARATOR
+========================================= */
+
+.investments-content hr {
+  margin: 45px 0;
+
+  border: none;
+
+  border-top:
+    1px solid #1e293b;
+}
+
+/* =========================================
+   ACTIVE INVESTMENTS HEADER
+========================================= */
+
+.investments-content > h2 {
+  margin-bottom: 25px;
+
+  color: #ffffff;
+
+  font-size: 25px;
+}
+
+/* =========================================
+   ACTIVE INVESTMENT STATUS
+========================================= */
+
+.status {
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  margin-top: 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+.status.active {
+  color: #4ade80;
+
+  background:
+    rgba(34, 197, 94, 0.1);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.25);
+}
+
+/* =========================================
+   DESKTOP PLAN LAYOUT
+========================================= */
+
+@media (min-width: 900px) {
+
+  .investments-content {
+    padding: 45px;
+  }
+
+  /*
+    The first three cards are displayed
+    in a clean three-column layout.
+  */
+
+  .investment-card {
+    width: calc(33.333% - 14px);
+
+    display: inline-block;
+
+    vertical-align: top;
+
+    margin-right: 15px;
+  }
+
+  /*
+    Active investments after the HR
+    should remain full width.
+  */
+
+  .investments-content hr
+  ~ .investment-card {
+    width: 100%;
+
+    margin-right: 0;
+  }
+
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 899px) {
+
+  .investments-content {
+    padding: 30px;
+  }
+
+  .investment-card {
+    width: 100%;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .investments-content {
+    margin-left: 0;
+
+    width: 100%;
+
+    padding: 25px 20px 100px;
+  }
+
+  .investments-content > h1 {
+    font-size: 27px;
+  }
+
+  .investment-card {
+    padding: 22px;
+
+    border-radius: 18px;
+  }
+
+  .investment-card h2 {
+    font-size: 20px;
+  }
+
+  .investment-card h3 {
+    font-size: 19px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .investments-content {
+    padding: 20px 15px 100px;
+  }
+
+  .investments-content > h1 {
+    font-size: 24px;
+  }
+
+  .investment-card {
+    padding: 20px;
+  }
+
+}

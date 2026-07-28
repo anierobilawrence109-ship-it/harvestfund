@@ -1,0 +1,294 @@
+/* =========================================
+   HARVESTFUND WITHDRAW PAGE
+========================================= */
+
+.withdraw-page {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background: #07111f;
+  color: #ffffff;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.withdraw-sidebar {
+  flex: 0 0 250px;
+  width: 250px;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.withdraw-content {
+  flex: 1;
+  min-width: 0;
+  width: calc(100% - 250px);
+  padding: 35px;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE TITLE
+========================================= */
+
+.withdraw-content h1 {
+  margin: 0 0 30px;
+  color: #ffffff;
+  font-size: 32px;
+}
+
+/* =========================================
+   WITHDRAW CARD
+========================================= */
+
+.withdraw-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 30px;
+  margin-bottom: 35px;
+
+  background: #0d1b2a;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+
+  box-sizing: border-box;
+}
+
+.withdraw-card h3 {
+  margin: 0 0 25px;
+  color: #4ade80;
+  font-size: 20px;
+}
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.withdraw-card > p {
+  margin-bottom: 20px;
+  color: #4ade80 !important;
+  font-size: 14px;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.withdraw-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.withdraw-card input {
+  width: 100%;
+  padding: 14px 16px;
+
+  background: #07111f;
+  color: #ffffff;
+
+  border: 1px solid #334155;
+  border-radius: 10px;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+  outline: none;
+}
+
+.withdraw-card input:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.withdraw-card input::placeholder {
+  color: #64748b;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.withdraw-card button {
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 5px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #15803d
+  );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.withdraw-card button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(34, 197, 94, 0.25);
+}
+
+.withdraw-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================
+   WITHDRAWAL HISTORY
+========================================= */
+
+.withdrawal-history {
+  width: 100%;
+  max-width: 700px;
+
+  padding: 30px;
+
+  background: #0d1b2a;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+
+  box-sizing: border-box;
+}
+
+.withdrawal-history h2 {
+  margin: 0 0 25px;
+  color: #ffffff;
+  font-size: 23px;
+}
+
+/* =========================================
+   HISTORY CARD
+========================================= */
+
+.withdrawal-history-card {
+  padding: 20px;
+  margin-bottom: 15px;
+
+  background: #07111f;
+  border: 1px solid #1e293b;
+  border-radius: 15px;
+
+  box-sizing: border-box;
+}
+
+.withdrawal-history-card:last-child {
+  margin-bottom: 0;
+}
+
+.withdrawal-history-card h3 {
+  margin: 0 0 15px;
+  color: #4ade80;
+  font-size: 20px;
+}
+
+.withdrawal-history-card p {
+  margin: 8px 0;
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.withdrawal-history-card strong {
+  color: #fbbf24;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .withdraw-sidebar {
+    flex: 0 0 220px;
+    width: 220px;
+  }
+
+  .withdraw-content {
+    width: calc(100% - 220px);
+    padding: 25px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .withdraw-page {
+    display: block;
+  }
+
+  .withdraw-sidebar {
+    width: 0;
+    flex: none;
+  }
+
+  .withdraw-content {
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 90px;
+  }
+
+  .withdraw-content h1 {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  .withdraw-card,
+  .withdrawal-history {
+    max-width: 100%;
+    padding: 22px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+  .withdraw-content {
+    padding: 15px;
+    padding-bottom: 90px;
+  }
+
+  .withdraw-content h1 {
+    font-size: 23px;
+  }
+
+  .withdraw-card,
+  .withdrawal-history {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .withdraw-card h3 {
+    font-size: 17px;
+  }
+
+  .withdrawal-history h2 {
+    font-size: 20px;
+  }
+
+}

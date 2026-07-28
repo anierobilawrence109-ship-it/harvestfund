@@ -1,0 +1,425 @@
+/* =========================================
+   HARVESTFUND REFERRAL PAGE
+========================================= */
+
+.referral-page {
+  min-height: 100vh;
+  background: #07111f;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.referral-content {
+  margin-left: 240px;
+
+  width: calc(100% - 240px);
+
+  min-height: 100vh;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(34, 197, 94, 0.08),
+      transparent 30%
+    ),
+    #07111f;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.referral-content > h1 {
+  margin: 0 0 10px;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.referral-content > p {
+  margin: 0 0 25px;
+
+  color: #4ade80 !important;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   REFERRAL CODE CARD
+========================================= */
+
+.referral-card {
+  width: 100%;
+  max-width: 750px;
+
+  padding: 28px;
+
+  margin-bottom: 25px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d1b2a,
+      #091522
+    );
+
+  border:
+    1px solid #1e293b;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 15px 35px
+    rgba(0, 0, 0, 0.2);
+}
+
+.referral-card h2 {
+  margin: 0 0 20px;
+
+  color: #ffffff;
+
+  font-size: 22px;
+}
+
+.referral-card > p {
+  margin: 20px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   REFERRAL CODE BOX
+========================================= */
+
+.code-box {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+
+  padding: 18px;
+
+  background:
+    rgba(34, 197, 94, 0.06);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.2);
+
+  border-radius: 14px;
+}
+
+.code-box h3 {
+  flex: 1;
+
+  margin: 0;
+
+  color: #4ade80;
+
+  font-size: 22px;
+
+  letter-spacing: 1px;
+
+  word-break: break-word;
+}
+
+.code-box button {
+  padding: 11px 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    #22c55e;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.code-box button:hover {
+  transform: translateY(-2px);
+
+  background:
+    #16a34a;
+}
+
+.code-box > p {
+  width: 100%;
+
+  margin: 0;
+
+  color: #4ade80;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   REFERRAL STATS
+========================================= */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+
+  width: 100%;
+
+  max-width: 750px;
+
+  margin-bottom: 25px;
+}
+
+.stats .stat-card {
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  background:
+    #0d1b2a;
+
+  border:
+    1px solid #1e293b;
+
+  border-radius: 18px;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.stats .stat-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(34, 197, 94, 0.5);
+}
+
+.stats .stat-card h3 {
+  margin: 0 0 12px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+.stats .stat-card p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 28px;
+
+  font-weight: 700;
+}
+
+/* =========================================
+   CLAIM BUTTON
+========================================= */
+
+.stats .stat-card button {
+  width: 100%;
+
+  padding: 12px 15px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #22c55e,
+      #15803d
+    );
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stats .stat-card button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(34, 197, 94, 0.25);
+}
+
+/* =========================================
+   REWARD CARD
+========================================= */
+
+.reward-card {
+  width: 100%;
+
+  max-width: 750px;
+
+  padding: 25px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d1b2a,
+      #091522
+    );
+
+  border:
+    1px solid #1e293b;
+
+  border-radius: 20px;
+}
+
+.reward-card h2 {
+  margin: 0 0 20px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+}
+
+.reward-card p {
+  padding: 14px 0;
+
+  margin: 0;
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+
+  border-bottom:
+    1px solid
+    rgba(148, 163, 184, 0.08);
+}
+
+.reward-card p:last-child {
+  border-bottom: none;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .referral-content {
+    padding: 30px;
+  }
+
+  .referral-card,
+  .stats,
+  .reward-card {
+    max-width: 100%;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .referral-content {
+    margin-left: 0;
+
+    width: 100%;
+
+    padding: 25px 20px 100px;
+  }
+
+  .referral-content > h1 {
+    font-size: 27px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-card {
+    padding: 22px;
+  }
+
+  .code-box {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .code-box h3 {
+    text-align: center;
+  }
+
+  .code-box button {
+    width: 100%;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+  .referral-content {
+    padding: 20px 15px 100px;
+  }
+
+  .referral-content > h1 {
+    font-size: 24px;
+  }
+
+  .referral-card,
+  .reward-card {
+    padding: 20px;
+  }
+
+  .stats .stat-card {
+    padding: 20px;
+  }
+
+}
