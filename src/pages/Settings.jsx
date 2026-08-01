@@ -21,7 +21,7 @@ function Settings() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/", {
+    fetch("https://harvestfund.onrender.com/", {
       headers: {
         Authorization: `Bearer ${
           localStorage.getItem("token") || ""
@@ -52,7 +52,7 @@ function Settings() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/change-password",
+        "https://harvestfund.onrender.com/api/auth/change-password",
         {
           method: "POST",
           headers: {

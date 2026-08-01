@@ -35,7 +35,7 @@ function Dashboard() {
     loadReferral();
 
     // CHECK BACKEND
-    fetch("http://localhost:5000/")
+    fetch("harvestfund.onrender.com/")
       .then((res) => res.json())
       .then((data) => {
         setServerStatus(data.message || "Backend Connected");

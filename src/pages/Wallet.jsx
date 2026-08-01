@@ -8,7 +8,7 @@ function Wallet() {
   const [serverMessage, setServerMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/wallet", {
+    fetch("https://harvestfund.onrender.com/api/wallet", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -36,7 +36,7 @@ function Wallet() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/wallet/fund",
+        "https://harvestfund.onrender.com/api/wallet/fund",
         {
           method: "POST",
           headers: {

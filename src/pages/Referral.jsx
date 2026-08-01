@@ -24,7 +24,7 @@ function Referral() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/referrals",
+        "https://harvestfund.onrender.com/api/referrals",
         {
           method: "GET",
           headers: {
@@ -119,7 +119,7 @@ function Referral() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/referrals/claim",
+        "arvestfund.onrender.com/api/referrals/claim",
         {
           method: "POST",
           headers: {

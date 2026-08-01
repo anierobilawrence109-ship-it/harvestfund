@@ -18,7 +18,7 @@ function Profile() {
           localStorage.getItem("token");
 
         const response = await fetch(
-          "http://localhost:5000/api/user/profile",
+          "https://harvestfund.onrender.com/api/user/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,

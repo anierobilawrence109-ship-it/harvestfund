@@ -22,7 +22,7 @@ function Admin() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/admin/stats",
+        "https://harvestfund.onrender.com/api/admin/stats",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ function Admin() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/admin/users",
+        "https://harvestfund.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ function Admin() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/withdrawals/admin",
+        "https://harvestfund.onrender.com/api/withdrawals/admin",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -133,7 +133,7 @@ function Admin() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/withdrawals/admin/${id}/status`,
+        `https://harvestfund.onrender.com/api/withdrawals/admin/${id}/status`,
         {
           method: "PATCH",
           headers: {

@@ -23,7 +23,7 @@ function History() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/transactions",
+        "https://harvestfund.onrender.com/api/transactions",
         {
           method: "GET",
           headers: {

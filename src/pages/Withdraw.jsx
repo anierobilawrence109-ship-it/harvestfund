@@ -31,7 +31,7 @@ function Withdraw() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/wallet",
+        "https://harvestfund.onrender.com/api/wallet",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ function Withdraw() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/withdrawals",
+        "https://harvestfund.onrender.com/api/withdrawals",
         {
           method: "GET",
           headers: {
@@ -171,7 +171,7 @@ function Withdraw() {
         localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/withdrawals/create",
+        "https://harvestfund.onrender.com/api/withdrawals/create",
         {
           method: "POST",
           headers: {
