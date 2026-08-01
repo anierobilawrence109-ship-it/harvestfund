@@ -2,125 +2,83 @@ import { createContext, useEffect, useState } from "react";
 
 export const WalletContext = createContext();
 
+const API_URL = "https://harvestfund.onrender.com";
+
 export function WalletProvider({ children }) {
   const [walletBalance, setWalletBalance] = useState(0);
   const [investments, setInvestments] = useState([]);
   const [referralEarnings, setReferralEarnings] = useState(0);
   const [activities, setActivities] = useState([]);
 
-  // ===========================
-  // LOAD WALLET
-  // ===========================
   const loadWallet = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("No login token found");
-        return;
-      }
+      if (!token) return;
 
-      const response = await fetch(
-        "http://localhost:5000/api/wallet",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/wallet`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
-      console.log("Wallet response:", data);
-
       if (response.ok && data.walletBalance !== undefined) {
         setWalletBalance(Number(data.walletBalance));
-      } else {
-        console.log("Wallet error:", data);
       }
     } catch (error) {
-      console.log("Wallet connection error:", error);
+      console.log(error);
     }
   };
 
-  // ===========================
-  // LOAD INVESTMENTS
-  // ===========================
   const loadInvestments = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("No login token found");
-        return;
-      }
+      if (!token) return;
 
-      const response = await fetch(
-        "http://localhost:5000/api/investment",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/investment`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
-      console.log("Investments response:", data);
-
       if (response.ok && Array.isArray(data)) {
         setInvestments(data);
-      } else {
-        console.log("Investments error:", data);
       }
     } catch (error) {
-      console.log("Investments connection error:", error);
+      console.log(error);
     }
   };
 
-  // ===========================
-  // LOAD REFERRAL DATA
-  // ===========================
   const loadReferral = async () => {
     try {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("No login token found");
-        return;
-      }
+      if (!token) return;
 
-      const response = await fetch(
-        "http://localhost:5000/api/referrals",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/api/referrals`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
-      console.log("Referral response:", data);
-
       if (response.ok) {
-        setReferralEarnings(
-          Number(data.referralEarnings || 0)
-        );
-      } else {
-        console.log("Referral error:", data);
+        setReferralEarnings(Number(data.referralEarnings || 0));
       }
     } catch (error) {
-      console.log("Referral connection error:", error);
+      console.log(error);
     }
   };
 
-  // ===========================
-  // LOAD DATA WHEN USER LOGS IN
-  // ===========================
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -131,24 +89,18 @@ export function WalletProvider({ children }) {
     }
   }, []);
 
-  // ===========================
-  // FUND WALLET
-  // ===========================
   const fundWallet = async (amount) => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/wallet/fund",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            amount: Number(amount),
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/wallet/fund`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          amount: Number(amount),
+        }),
+      });
 
       const data = await response.json();
 
@@ -156,9 +108,7 @@ export function WalletProvider({ children }) {
         setWalletBalance(Number(data.walletBalance));
 
         setActivities((prev) => [
-          `💰 Wallet funded with ₦${Number(
-            amount
-          ).toLocaleString()}`,
+          `💰 Wallet funded with ₦${Number(amount).toLocaleString()}`,
           ...prev,
         ]);
 
@@ -167,14 +117,10 @@ export function WalletProvider({ children }) {
         alert(data.message);
       }
     } catch (error) {
-      console.error("Fund Wallet Error:", error);
-      alert(`Fund Wallet Error: ${error.message}`);
+      alert(error.message);
     }
   };
 
-  // ===========================
-  // INVEST
-  // ===========================
   const invest = async (planName, amount) => {
     amount = Number(amount);
 
@@ -193,33 +139,27 @@ export function WalletProvider({ children }) {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/investment/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            plan_name: planName,
-            amount,
-            daily_return: dailyReturn,
-            duration,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/api/investment/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          plan_name: planName,
+          amount,
+          daily_return: dailyReturn,
+          duration,
+        }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Update wallet with real Supabase balance
         setWalletBalance(Number(data.walletBalance));
 
-        // Reload investments from Supabase
         await loadInvestments();
 
-        // Add activity
         setActivities((prev) => [
           `🌾 Invested ₦${amount.toLocaleString()} in ${planName}`,
           ...prev,
@@ -233,15 +173,11 @@ export function WalletProvider({ children }) {
         return false;
       }
     } catch (error) {
-      console.error("Investment Error:", error);
-      alert(`Investment Error: ${error.message}`);
+      alert(error.message);
       return false;
     }
   };
 
-  // ===========================
-  // TEMP WITHDRAW
-  // ===========================
   const withdraw = (amount) => {
     amount = Number(amount);
 
@@ -260,28 +196,19 @@ export function WalletProvider({ children }) {
     return true;
   };
 
-  // ===========================
-  // PROVIDER
-  // ===========================
   return (
     <WalletContext.Provider
       value={{
         walletBalance,
         setWalletBalance,
-
         loadWallet,
         loadInvestments,
         loadReferral,
-
         fundWallet,
-
         investments,
         invest,
-
         withdraw,
-
         referralEarnings,
-
         activities,
       }}
     >
