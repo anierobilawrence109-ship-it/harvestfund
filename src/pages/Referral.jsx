@@ -259,19 +259,22 @@ function Referral() {
         <div className="reward-card">
   <h2>Referral Rewards</h2>
 
-  <p>
-    🎁 Earn <strong>10%</strong> commission whenever someone you referred
-    invests on HarvestFund.
-  </p>
+  <p>🌾 Rice Plan (₦4,000) → Earn ₦400</p>
 
-  <p>
-    Your referral commission is calculated automatically based on the
-    investment amount.
-  </p>
+  <p>🫘 Beans Plan (₦8,000) → Earn ₦800</p>
 
-  <p>
-    Once your referral bonus is available, you can claim it directly into
-    your wallet.
+  <p>🍌 Plantain Plan (₦16,000) → Earn ₦1,600</p>
+
+  <p>🌽 Maize Plan (₦32,000) → Earn ₦3,200</p>
+
+  <p
+    style={{
+      marginTop: "15px",
+      fontWeight: "bold",
+      color: "#1b5e20",
+    }}
+  >
+    💰 You earn 10% of your referral's first investment.
   </p>
 </div>
       </div>
