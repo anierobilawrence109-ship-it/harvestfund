@@ -75,49 +75,48 @@ function Investments() {
         </p>
 
         <div className="investment-card">
-          <h2>🌽 Maize Plan</h2>
-          <p>Investment: ₦5,000</p>
-          <p>Daily Return: ₦500</p>
-          <p>Duration: 30 Days</p>
+  <h2>🌾 Rice Plan</h2>
+  <p>Investment: ₦4,000</p>
+  <p>Daily Earnings: ₦500</p>
+  <p>Duration: 60 Days</p>
 
-          <button
-            onClick={() =>
-              invest("Maize Plan", 5000, 500, 30)
-            }
-          >
-            Invest
-          </button>
-        </div>
+  <button onClick={() => invest("Rice Plan", 4000, 500, 60)}>
+    Invest
+  </button>
+</div>
 
-        <div className="investment-card">
-          <h2>🐔 Poultry Plan</h2>
-          <p>Investment: ₦15,000</p>
-          <p>Daily Return: ₦1,500</p>
-          <p>Duration: 30 Days</p>
+<div className="investment-card">
+  <h2>🫘 Beans Plan</h2>
+  <p>Investment: ₦8,000</p>
+  <p>Daily Earnings: ₦1,000</p>
+  <p>Duration: 60 Days</p>
 
-          <button
-            onClick={() =>
-              invest("Poultry Plan", 15000, 1500, 30)
-            }
-          >
-            Invest
-          </button>
-        </div>
+  <button onClick={() => invest("Beans Plan", 8000, 1000, 60)}>
+    Invest
+  </button>
+</div>
 
-        <div className="investment-card">
-          <h2>🌾 Rice Plan</h2>
-          <p>Investment: ₦50,000</p>
-          <p>Daily Return: ₦2,000</p>
-          <p>Duration: 60 Days</p>
+<div className="investment-card">
+  <h2>🍌 Plantain Plan</h2>
+  <p>Investment: ₦16,000</p>
+  <p>Daily Earnings: ₦2,000</p>
+  <p>Duration: 60 Days</p>
 
-          <button
-            onClick={() =>
-              invest("Rice Plan", 50000, 2000, 60)
-            }
-          >
-            Invest
-          </button>
-        </div>
+  <button onClick={() => invest("Plantain Plan", 16000, 2000, 60)}>
+    Invest
+  </button>
+</div>
+
+<div className="investment-card">
+  <h2>🌽 Maize Plan</h2>
+  <p>Investment: ₦32,000</p>
+  <p>Daily Earnings: ₦4,000</p>
+  <p>Duration: 60 Days</p>
+
+  <button onClick={() => invest("Maize Plan", 32000, 4000, 60)}>
+    Invest
+  </button>
+</div>
 
         <hr />
 
