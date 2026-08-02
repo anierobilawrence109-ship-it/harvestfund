@@ -119,7 +119,7 @@ function Referral() {
       }
 
       const response = await fetch(
-        "arvestfund.onrender.com/api/referrals/claim",
+        "https://harvestfund.onrender.com/api/referrals/claim",
         {
           method: "POST",
           headers: {
@@ -257,22 +257,23 @@ function Referral() {
             REFERRAL REWARDS
         =========================== */}
         <div className="reward-card">
-          <h2>
-            Referral Rewards
-          </h2>
+  <h2>Referral Rewards</h2>
 
-          <p>
-            🌽 ₦5,000 Investment → Earn ₦500
-          </p>
+  <p>
+    🎁 Earn <strong>10%</strong> commission whenever someone you referred
+    invests on HarvestFund.
+  </p>
 
-          <p>
-            🐔 ₦15,000 Investment → Earn ₦1,500
-          </p>
+  <p>
+    Your referral commission is calculated automatically based on the
+    investment amount.
+  </p>
 
-          <p>
-            🌾 ₦50,000 Investment → Earn ₦2,000
-          </p>
-        </div>
+  <p>
+    Once your referral bonus is available, you can claim it directly into
+    your wallet.
+  </p>
+</div>
       </div>
     </div>
   );
