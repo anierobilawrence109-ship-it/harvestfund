@@ -20,6 +20,7 @@ const referralRoutes = require("./routes/referralRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const withdrawalRoutes = require("./routes/withdrawalRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const fundRoutes = require("./routes/fundRoutes");
 const {
   processAutomaticEarnings,
 } = require("./services/earningScheduler");
@@ -47,6 +48,7 @@ app.use("/api/investment", investmentRoutes);
 app.use("/api/referrals", referralRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/fund", fundRoutes);
 app.use(
   "/api/withdrawals",
   withdrawalRoutes

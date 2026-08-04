@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import "../styles/Wallet.css";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://ykwqajqimrpkswvxypdr.supabase.co",
+  "sb_publishable_rx2TLiUIKNYJXbtpMQoRNg_JAu_OS4u"
+);
 
 function Wallet() {
   const [walletBalance, setWalletBalance] = useState(0);
   const [amount, setAmount] = useState("");
+  const [receipt, setReceipt] = useState(null);
   const [serverMessage, setServerMessage] = useState("");
 
   useEffect(() => {
@@ -28,41 +35,74 @@ function Wallet() {
       });
   }, []);
 
-  const handleFundWallet = async () => {
-    if (!amount || Number(amount) <= 0) {
-      alert("Enter a valid amount");
+  const submitFundingRequest = async () => {
+  if (!amount || Number(amount) <= 0) {
+    alert("Enter a valid amount");
+    return;
+  }
+
+  if (!receipt) {
+    alert("Please upload your payment receipt.");
+    return;
+  }
+
+  try {
+    // Upload receipt to Supabase Storage
+    const fileName = `${Date.now()}-${receipt.name}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("payment-receipts")
+      .upload(fileName, receipt);
+
+    if (uploadError) {
+      alert(uploadError.message);
       return;
     }
 
-    try {
-      const response = await fetch(
-        "https://harvestfund.onrender.com/api/wallet/fund",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({
-            amount: Number(amount),
-          }),
-        }
-      );
+    // Get public URL
+    const { data: publicData } = supabase.storage
+      .from("payment-receipts")
+      .getPublicUrl(fileName);
 
-      const data = await response.json();
+    const receipt_url = publicData.publicUrl;
 
-      if (response.ok) {
-        setWalletBalance(Number(data.walletBalance));
-        setAmount("");
-        alert(data.message);
-      } else {
-        alert(data.message);
+    // Submit funding request
+    const response = await fetch(
+      "https://harvestfund.onrender.com/api/wallet/request-funding",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          amount: Number(amount),
+          receipt_url,
+        }),
       }
-    } catch (error) {
-      alert("Unable to connect to server.");
-    }
-  };
+    );
 
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message);
+
+      setAmount("");
+      setReceipt(null);
+
+      // Clear the file input
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput) {
+        fileInput.value = "";
+      }
+    } else {
+      alert(result.message);
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Unable to connect to server.");
+  }
+};
   return (
     <div className="wallet-page">
       <Sidebar />
@@ -86,12 +126,17 @@ function Wallet() {
           onChange={(e) => setAmount(e.target.value)}
           className="wallet-input"
         />
-
+<input
+  type="file"
+  accept="image/*,.pdf"
+  onChange={(e) => setReceipt(e.target.files[0])}
+  className="wallet-input"
+/>
         <button
           className="fund-btn"
-          onClick={handleFundWallet}
+          onClick={submitFundingRequest}
         >
-          Fund Wallet
+          Submit Funding Request
         </button>
 
         <div className="quick-amounts">

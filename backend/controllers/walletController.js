@@ -47,12 +47,12 @@ exports.getWallet = async (req, res) => {
 };
 
 // ===========================
-// FUND WALLET
+// REQUEST WALLET FUNDING
 // ===========================
-exports.fundWallet = async (req, res) => {
+exports.requestFunding = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { amount } = req.body;
+    const { amount, receipt_url } = req.body;
 
     if (!amount || Number(amount) <= 0) {
       return res.status(400).json({
@@ -60,47 +60,26 @@ exports.fundWallet = async (req, res) => {
       });
     }
 
-    const { data: wallet, error } = await supabase
-      .from("wallets")
-      .select("*")
-      .eq("user_id", userId)
-      .single();
+    const { error } = await supabase
+      .from("wallet_funding_requests")
+      .insert([
+        {
+          user_id: userId,
+          amount: Number(amount),
+          receipt_url: receipt_url || "",
+          status: "Pending",
+        },
+      ]);
 
-    if (error || !wallet) {
-      return res.status(404).json({
-        message: "Wallet not found",
-      });
-    }
-
-    const newBalance =
-      Number(wallet.balance) + Number(amount);
-
-    const { error: updateError } = await supabase
-      .from("wallets")
-      .update({
-        balance: newBalance,
-      })
-      .eq("user_id", userId);
-
-    if (updateError) {
+    if (error) {
       return res.status(500).json({
-        message: updateError.message,
+        message: error.message,
       });
     }
 
-    // Save transaction
-    await supabase.from("transactions").insert([
-      {
-        user_id: userId,
-        type: "Wallet Funding",
-        amount,
-        status: "Completed",
-      },
-    ]);
-
-    res.status(200).json({
-      message: "Wallet funded successfully",
-      walletBalance: newBalance,
+    res.status(201).json({
+      message:
+        "Funding request submitted successfully. Please wait for admin approval.",
     });
 
   } catch (error) {
