@@ -51,7 +51,7 @@ function Wallet() {
     const fileName = `${Date.now()}-${receipt.name}`;
 
     const { error: uploadError } = await supabase.storage
-      .from("payment-receipts")
+      .from("receipts")
       .upload(fileName, receipt);
 
     if (uploadError) {
@@ -61,7 +61,7 @@ function Wallet() {
 
     // Get public URL
     const { data: publicData } = supabase.storage
-      .from("payment-receipts")
+      .from("receipts")
       .getPublicUrl(fileName);
 
     const receipt_url = publicData.publicUrl;
