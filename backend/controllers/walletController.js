@@ -35,15 +35,25 @@ exports.getWallet = async (req, res) => {
       wallet = newWallet;
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       walletBalance: wallet.balance,
     });
 
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error.message,
     });
   }
+};
+
+// ===========================
+// DIRECT FUNDING (DISABLED)
+// ===========================
+exports.fundWallet = async (req, res) => {
+  return res.status(200).json({
+    message:
+      "Direct wallet funding has been disabled. Please submit a funding request.",
+  });
 };
 
 // ===========================
@@ -77,13 +87,13 @@ exports.requestFunding = async (req, res) => {
       });
     }
 
-    res.status(201).json({
+    return res.status(201).json({
       message:
         "Funding request submitted successfully. Please wait for admin approval.",
     });
 
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error.message,
     });
   }
