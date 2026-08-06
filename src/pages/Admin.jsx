@@ -9,7 +9,8 @@ function Admin() {
 
   const [users, setUsers] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
-
+const [fundingRequests, setFundingRequests] = useState([]);
+const [fundingLoading, setFundingLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [usersLoading, setUsersLoading] = useState(true);
   const [serverMessage, setServerMessage] = useState("");
@@ -82,7 +83,38 @@ function Admin() {
       setUsersLoading(false);
     }
   };
+// ==========================================
+// LOAD FUNDING REQUESTS
+// ==========================================
+const loadFundingRequests = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
+    const response = await fetch(
+      "https://harvestfund.onrender.com/api/admin/funding-requests",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setFundingRequests(data.requests || []);
+    } else {
+      setServerMessage(
+        data.message || "Unable to load funding requests."
+      );
+    }
+  } catch (error) {
+    console.error(error);
+    setServerMessage("Unable to connect to server.");
+  } finally {
+    setFundingLoading(false);
+  }
+};
   // ==========================================
   // LOAD WITHDRAWALS
   // ==========================================
@@ -119,12 +151,12 @@ function Admin() {
   // ==========================================
   // LOAD ALL DATA
   // ==========================================
-  useEffect(() => {
-    loadAdminStats();
-    loadUsers();
-    loadWithdrawals();
-  }, []);
-
+ useEffect(() => {
+  loadAdminStats();
+  loadUsers();
+  loadWithdrawals();
+  loadFundingRequests();
+}, []);
   // ==========================================
   // UPDATE WITHDRAWAL
   // ==========================================

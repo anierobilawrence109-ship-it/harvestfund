@@ -7,6 +7,9 @@ const adminMiddleware = require("../middleware/adminMiddleware");
 const {
   getAdminStats,
   getAllUsers,
+  getFundingRequests,
+  approveFundingRequest,
+  rejectFundingRequest,
 } = require("../controllers/adminController");
 
 const {
@@ -25,7 +28,7 @@ router.get(
 );
 
 // ==========================================
-// ADMIN: GET ALL REGISTERED USERS
+// ADMIN USERS
 // ==========================================
 router.get(
   "/users",
@@ -35,7 +38,31 @@ router.get(
 );
 
 // ==========================================
-// ADMIN: GET ALL WITHDRAWALS
+// FUNDING REQUESTS
+// ==========================================
+router.get(
+  "/funding-requests",
+  authMiddleware,
+  adminMiddleware,
+  getFundingRequests
+);
+
+router.patch(
+  "/funding-requests/:id/approve",
+  authMiddleware,
+  adminMiddleware,
+  approveFundingRequest
+);
+
+router.patch(
+  "/funding-requests/:id/reject",
+  authMiddleware,
+  adminMiddleware,
+  rejectFundingRequest
+);
+
+// ==========================================
+// WITHDRAWALS
 // ==========================================
 router.get(
   "/withdrawals",
@@ -44,9 +71,6 @@ router.get(
   getAllWithdrawals
 );
 
-// ==========================================
-// ADMIN: APPROVE OR REJECT WITHDRAWAL
-// ==========================================
 router.patch(
   "/withdrawals/:id/status",
   authMiddleware,
