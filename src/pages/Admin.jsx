@@ -2,17 +2,28 @@ import { useEffect, useState } from "react";
 import "../styles/Admin.css";
 
 function Admin() {
+  // ==============================
+  // Dashboard Statistics
+  // ==============================
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalInvestments, setTotalInvestments] = useState(0);
   const [totalWalletBalance, setTotalWalletBalance] = useState(0);
   const [pendingWithdrawals, setPendingWithdrawals] = useState(0);
 
+  // ==============================
+  // Data
+  // ==============================
   const [users, setUsers] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
-const [fundingRequests, setFundingRequests] = useState([]);
-const [fundingLoading, setFundingLoading] = useState(true);
+  const [fundingRequests, setFundingRequests] = useState([]);
+
+  // ==============================
+  // Loading States
+  // ==============================
   const [loading, setLoading] = useState(true);
   const [usersLoading, setUsersLoading] = useState(true);
+  const [fundingLoading, setFundingLoading] = useState(true);
+
   const [serverMessage, setServerMessage] = useState("");
 
   // ==========================================
@@ -37,16 +48,11 @@ const [fundingLoading, setFundingLoading] = useState(true);
         setTotalUsers(Number(data.totalUsers || 0));
         setTotalInvestments(Number(data.totalInvestments || 0));
         setTotalWalletBalance(Number(data.totalWalletBalance || 0));
-        setPendingWithdrawals(
-          Number(data.pendingWithdrawals || 0)
-        );
+        setPendingWithdrawals(Number(data.pendingWithdrawals || 0));
       } else {
-        setServerMessage(
-          data.message || "Unable to load admin statistics."
-        );
+        setServerMessage(data.message);
       }
     } catch (error) {
-      console.error("Admin Stats Error:", error);
       setServerMessage("Unable to connect to server.");
     }
   };
@@ -72,49 +78,44 @@ const [fundingLoading, setFundingLoading] = useState(true);
       if (response.ok) {
         setUsers(data.users || []);
       } else {
-        setServerMessage(
-          data.message || "Unable to load users."
-        );
+        setServerMessage(data.message);
       }
     } catch (error) {
-      console.error("Users Error:", error);
       setServerMessage("Unable to connect to server.");
     } finally {
       setUsersLoading(false);
     }
   };
-// ==========================================
-// LOAD FUNDING REQUESTS
-// ==========================================
-const loadFundingRequests = async () => {
-  try {
-    const token = localStorage.getItem("token");
 
-    const response = await fetch(
-      "https://harvestfund.onrender.com/api/admin/funding-requests",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  // ==========================================
+  // LOAD FUNDING REQUESTS
+  // ==========================================
+  const loadFundingRequests = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-    const data = await response.json();
-
-    if (response.ok) {
-      setFundingRequests(data.requests || []);
-    } else {
-      setServerMessage(
-        data.message || "Unable to load funding requests."
+      const response = await fetch(
+        "https://harvestfund.onrender.com/api/admin/funding-requests",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFundingRequests(data.requests || []);
+      } else {
+        setServerMessage(data.message);
+      }
+    } catch (error) {
+      setServerMessage("Unable to connect to server.");
+    } finally {
+      setFundingLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-    setServerMessage("Unable to connect to server.");
-  } finally {
-    setFundingLoading(false);
-  }
-};
+  };
   // ==========================================
   // LOAD WITHDRAWALS
   // ==========================================
@@ -136,12 +137,9 @@ const loadFundingRequests = async () => {
       if (response.ok) {
         setWithdrawals(data.withdrawals || []);
       } else {
-        setServerMessage(
-          data.message || "Unable to load withdrawals."
-        );
+        setServerMessage(data.message);
       }
     } catch (error) {
-      console.error("Withdrawals Error:", error);
       setServerMessage("Unable to connect to server.");
     } finally {
       setLoading(false);
@@ -149,16 +147,17 @@ const loadFundingRequests = async () => {
   };
 
   // ==========================================
-  // LOAD ALL DATA
+  // LOAD EVERYTHING
   // ==========================================
- useEffect(() => {
-  loadAdminStats();
-  loadUsers();
-  loadWithdrawals();
-  loadFundingRequests();
-}, []);
+  useEffect(() => {
+    loadAdminStats();
+    loadUsers();
+    loadWithdrawals();
+    loadFundingRequests();
+  }, []);
+
   // ==========================================
-  // UPDATE WITHDRAWAL
+  // UPDATE WITHDRAWAL STATUS
   // ==========================================
   const updateWithdrawalStatus = async (id, status) => {
     try {
@@ -172,36 +171,81 @@ const loadFundingRequests = async () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            status,
-          }),
+          body: JSON.stringify({ status }),
         }
       );
 
       const data = await response.json();
 
-      if (response.ok) {
-        alert(data.message);
+      alert(data.message);
 
-        await loadWithdrawals();
-        await loadAdminStats();
-      } else {
-        alert(
-          data.message || "Unable to update withdrawal."
-        );
-      }
+      loadWithdrawals();
+      loadAdminStats();
+
     } catch (error) {
-      console.error("Update Withdrawal Error:", error);
       alert("Unable to connect to server.");
     }
   };
 
+  // ==========================================
+  // APPROVE FUNDING
+  // ==========================================
+  const approveFunding = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `https://harvestfund.onrender.com/api/admin/funding-requests/${id}/approve`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      alert(data.message);
+
+      loadFundingRequests();
+      loadAdminStats();
+
+    } catch (error) {
+      alert("Unable to connect to server.");
+    }
+  };
+
+  // ==========================================
+  // REJECT FUNDING
+  // ==========================================
+  const rejectFunding = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `https://harvestfund.onrender.com/api/admin/funding-requests/${id}/reject`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      alert(data.message);
+
+      loadFundingRequests();
+
+    } catch (error) {
+      alert("Unable to connect to server.");
+    }
+  };
   return (
     <div className="admin-page">
 
-      {/* =====================================
-          ADMIN HEADER
-      ====================================== */}
       <header className="admin-header">
         <div>
           <div className="admin-logo">
@@ -216,15 +260,12 @@ const loadFundingRequests = async () => {
         </div>
       </header>
 
-      {/* =====================================
-          MAIN CONTENT
-      ====================================== */}
       <main className="admin-content">
 
         <h1>Admin Dashboard</h1>
 
         <p className="admin-subtitle">
-          Monitor platform activity and manage withdrawal requests.
+          Monitor platform activity and manage your platform.
         </p>
 
         {serverMessage && (
@@ -233,13 +274,15 @@ const loadFundingRequests = async () => {
           </div>
         )}
 
-        {/* =====================================
+        {/* ==========================
             STATISTICS
-        ====================================== */}
+        ========================== */}
+
         <section className="admin-stats">
 
           <div className="admin-stat-card">
             <span>👥</span>
+
             <div>
               <p>Total Users</p>
               <h2>{totalUsers}</h2>
@@ -248,6 +291,7 @@ const loadFundingRequests = async () => {
 
           <div className="admin-stat-card">
             <span>🌾</span>
+
             <div>
               <p>Total Investments</p>
               <h2>
@@ -258,6 +302,7 @@ const loadFundingRequests = async () => {
 
           <div className="admin-stat-card">
             <span>💰</span>
+
             <div>
               <p>Total Wallet Balance</p>
               <h2>
@@ -268,6 +313,7 @@ const loadFundingRequests = async () => {
 
           <div className="admin-stat-card pending">
             <span>💸</span>
+
             <div>
               <p>Pending Withdrawals</p>
               <h2>{pendingWithdrawals}</h2>
@@ -276,9 +322,120 @@ const loadFundingRequests = async () => {
 
         </section>
 
-        {/* =====================================
+        {/* ==========================
+            FUNDING REQUESTS
+        ========================== */}
+
+        <section className="admin-section">
+
+          <div className="section-heading">
+            <div>
+              <h2>💳 Wallet Funding Requests</h2>
+              <p>Approve or reject wallet funding requests.</p>
+            </div>
+          </div>
+
+          {fundingLoading ? (
+            <p className="empty-message">
+              Loading funding requests...
+            </p>
+          ) : fundingRequests.length === 0 ? (
+            <p className="empty-message">
+              No funding requests found.
+            </p>
+          ) : (
+            <div className="withdrawal-grid">
+
+              {fundingRequests.map((request) => (
+
+                <div
+                  className="admin-withdrawal-card"
+                  key={request.id}
+                >
+
+                  <div className="withdrawal-top">
+
+                    <div>
+                      <p className="request-label">
+                        Wallet Funding
+                      </p>
+
+                      <h3>
+                        ₦{Number(request.amount).toLocaleString()}
+                      </h3>
+                    </div>
+
+                    <span
+                      className={`status ${request.status.toLowerCase()}`}
+                    >
+                      {request.status}
+                    </span>
+
+                  </div>
+
+                  <div className="withdrawal-details">
+
+                    <p>
+                      <strong>👤 Name:</strong>{" "}
+                      {request.users?.full_name}
+                    </p>
+
+                    <p>
+                      <strong>📧 Email:</strong>{" "}
+                      {request.users?.email}
+                    </p>
+
+                    <p>
+                      <strong>📅 Date:</strong>{" "}
+                      {new Date(request.created_at).toLocaleString()}
+                    </p>
+
+                    <p>
+                      <strong>🧾 Receipt:</strong>{" "}
+                      <a
+                        href={request.receipt_url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        View Receipt
+                      </a>
+                    </p>
+
+                  </div>
+
+                  {request.status === "Pending" && (
+
+                    <div className="withdrawal-actions">
+
+                      <button
+                        className="approve-btn"
+                        onClick={() => approveFunding(request.id)}
+                      >
+                        ✅ Approve
+                      </button>
+
+                      <button
+                        className="reject-btn"
+                        onClick={() => rejectFunding(request.id)}
+                      >
+                        ❌ Reject
+                      </button>
+
+                    </div>
+
+                  )}
+
+                </div>
+
+              ))}
+
+            </div>
+          )}
+        </section>
+        {/* ==========================
             WITHDRAWAL REQUESTS
-        ====================================== */}
+        ========================== */}
+
         <section className="admin-section">
 
           <div className="section-heading">
@@ -289,75 +446,58 @@ const loadFundingRequests = async () => {
           </div>
 
           {loading ? (
-            <p className="empty-message">
-              Loading withdrawals...
-            </p>
+            <p className="empty-message">Loading withdrawals...</p>
           ) : withdrawals.length === 0 ? (
             <p className="empty-message">
-              No withdrawal requests yet.
+              No withdrawal requests found.
             </p>
           ) : (
             <div className="withdrawal-grid">
 
               {withdrawals.map((item) => (
+
                 <div
                   className="admin-withdrawal-card"
                   key={item.id}
                 >
 
                   <div className="withdrawal-top">
+
                     <div>
                       <p className="request-label">
                         Withdrawal Request
                       </p>
 
                       <h3>
-                        ₦
-                        {Number(
-                          item.amount || 0
-                        ).toLocaleString()}
+                        ₦{Number(item.amount).toLocaleString()}
                       </h3>
                     </div>
 
                     <span
-                      className={`status ${String(
-                        item.status
-                      ).toLowerCase()}`}
+                      className={`status ${item.status.toLowerCase()}`}
                     >
                       {item.status}
                     </span>
+
                   </div>
 
                   <div className="withdrawal-details">
 
-                    <p>
-                      <strong>🏦 Bank:</strong>{" "}
-                      {item.bank_name}
-                    </p>
-
-                    <p>
-                      <strong>🔢 Account:</strong>{" "}
-                      {item.account_number}
-                    </p>
-
-                    <p>
-                      <strong>👤 Name:</strong>{" "}
-                      {item.account_name}
-                    </p>
+                    <p><strong>🏦 Bank:</strong> {item.bank_name}</p>
+                    <p><strong>🔢 Account:</strong> {item.account_number}</p>
+                    <p><strong>👤 Name:</strong> {item.account_name}</p>
 
                     <p>
                       <strong>📅 Date:</strong>{" "}
                       {item.created_at
-                        ? new Date(
-                            item.created_at
-                          ).toLocaleString()
+                        ? new Date(item.created_at).toLocaleString()
                         : "N/A"}
                     </p>
 
                   </div>
 
-                  {String(item.status).toLowerCase() ===
-                    "pending" && (
+                  {item.status === "Pending" && (
+
                     <div className="withdrawal-actions">
 
                       <button
@@ -385,9 +525,11 @@ const loadFundingRequests = async () => {
                       </button>
 
                     </div>
+
                   )}
 
                 </div>
+
               ))}
 
             </div>
@@ -395,30 +537,30 @@ const loadFundingRequests = async () => {
 
         </section>
 
-        {/* =====================================
+        {/* ==========================
             REGISTERED USERS
-        ====================================== */}
+        ========================== */}
+
         <section className="admin-section">
 
           <div className="section-heading">
             <div>
               <h2>👥 Registered Users</h2>
-              <p>View all users registered on HarvestFund.</p>
+              <p>All HarvestFund users.</p>
             </div>
           </div>
 
           {usersLoading ? (
-            <p className="empty-message">
-              Loading users...
-            </p>
+            <p className="empty-message">Loading users...</p>
           ) : users.length === 0 ? (
             <p className="empty-message">
-              No registered users found.
+              No users found.
             </p>
           ) : (
             <div className="users-grid">
 
               {users.map((user) => (
+
                 <div
                   className="admin-user-card"
                   key={user.id}
@@ -430,32 +572,25 @@ const loadFundingRequests = async () => {
 
                   <div className="user-info">
 
-                    <h3>
-                      {user.full_name}
-                    </h3>
+                    <h3>{user.full_name}</h3>
+
+                    <p>📧 {user.email}</p>
 
                     <p>
-                      📧 {user.email}
-                    </p>
-
-                    <p>
-                      📱{" "}
-                      {user.phone ||
-                        "Phone not provided"}
+                      📱 {user.phone || "No phone"}
                     </p>
 
                     <small>
                       Joined:{" "}
                       {user.created_at
-                        ? new Date(
-                            user.created_at
-                          ).toLocaleDateString()
+                        ? new Date(user.created_at).toLocaleDateString()
                         : "N/A"}
                     </small>
 
                   </div>
 
                 </div>
+
               ))}
 
             </div>
