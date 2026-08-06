@@ -73,50 +73,94 @@ function Investments() {
         <p style={{ color: "green", fontWeight: "bold" }}>
           {serverMessage}
         </p>
+<div className="investment-card">
+  <h2>🌽 Maize Plan</h2>
+  <p>Investment: ₦5,000</p>
+  <p>Daily Earnings: ₦750</p>
+  <p>Duration: 365 Days</p>
 
-        <div className="investment-card">
-  <h2>🌾 Rice Plan</h2>
-  <p>Investment: ₦4,000</p>
-  <p>Daily Earnings: ₦500</p>
-  <p>Duration: 60 Days</p>
-
-  <button onClick={() => invest("Rice Plan", 4000, 500, 60)}>
+  <button onClick={() => invest("Maize Plan", 5000, 750, 365)}>
     Invest
   </button>
 </div>
 
 <div className="investment-card">
   <h2>🫘 Beans Plan</h2>
-  <p>Investment: ₦8,000</p>
-  <p>Daily Earnings: ₦1,000</p>
-  <p>Duration: 60 Days</p>
+  <p>Investment: ₦10,000</p>
+  <p>Daily Earnings: ₦1,600</p>
+  <p>Duration: 365 Days</p>
 
-  <button onClick={() => invest("Beans Plan", 8000, 1000, 60)}>
+  <button onClick={() => invest("Beans Plan", 10000, 1600, 365)}>
+    Invest
+  </button>
+</div>
+
+<div className="investment-card">
+  <h2>🥜 Groundnut Plan</h2>
+  <p>Investment: ₦30,000</p>
+  <p>Daily Earnings: ₦5,100</p>
+  <p>Duration: 365 Days</p>
+
+  <button onClick={() => invest("Groundnut Plan", 30000, 5100, 365)}>
+    Invest
+  </button>
+</div>
+
+<div className="investment-card">
+  <h2>🍅 Tomatoes Plan</h2>
+  <p>Investment: ₦50,000</p>
+  <p>Daily Earnings: ₦9,000</p>
+  <p>Duration: 365 Days</p>
+
+  <button onClick={() => invest("Tomatoes Plan", 50000, 9000, 365)}>
     Invest
   </button>
 </div>
 
 <div className="investment-card">
   <h2>🍌 Plantain Plan</h2>
-  <p>Investment: ₦16,000</p>
-  <p>Daily Earnings: ₦2,000</p>
-  <p>Duration: 60 Days</p>
+  <p>Investment: ₦80,000</p>
+  <p>Daily Earnings: ₦15,200</p>
+  <p>Duration: 365 Days</p>
 
-  <button onClick={() => invest("Plantain Plan", 16000, 2000, 60)}>
+  <button onClick={() => invest("Plantain Plan", 80000, 15200, 365)}>
     Invest
   </button>
 </div>
 
 <div className="investment-card">
-  <h2>🌽 Maize Plan</h2>
-  <p>Investment: ₦32,000</p>
-  <p>Daily Earnings: ₦4,000</p>
-  <p>Duration: 60 Days</p>
+  <h2>🌾 Rice Plan</h2>
+  <p>Investment: ₦120,000</p>
+  <p>Daily Earnings: ₦24,000</p>
+  <p>Duration: 365 Days</p>
 
-  <button onClick={() => invest("Maize Plan", 32000, 4000, 60)}>
+  <button onClick={() => invest("Rice Plan", 120000, 24000, 365)}>
     Invest
   </button>
 </div>
+
+<div className="investment-card">
+  <h2>🌿 Cassava Plan</h2>
+  <p>Investment: ₦250,000</p>
+  <p>Daily Earnings: ₦55,000</p>
+  <p>Duration: 365 Days</p>
+
+  <button onClick={() => invest("Cassava Plan", 250000, 55000, 365)}>
+    Invest
+  </button>
+</div>
+
+<div className="investment-card">
+  <h2>🍠 Yam Plan</h2>
+  <p>Investment: ₦500,000</p>
+  <p>Daily Earnings: ₦125,000</p>
+  <p>Duration: 365 Days</p>
+
+  <button onClick={() => invest("Yam Plan", 500000, 125000, 365)}>
+    Invest
+  </button>
+</div>
+       
 
         <hr />
 

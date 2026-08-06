@@ -8,68 +8,71 @@ function Projects({ publicPage = false }) {
   const navigate = useNavigate();
 
   const projects = [
-    {
-      name: "🌾 Rice Plan",
-      planName: "Rice Plan",
-      amount: 4000,
-      earnings: 500,
-      duration: "60 Days",
-      status: "Active",
-    },
-    {
-      name: "🫘 Beans Plan",
-      planName: "Beans Plan",
-      amount: 8000,
-      earnings: 1000,
-      duration: "60 Days",
-      status: "Active",
-    },
-    {
-      name: "🍌 Plantain Plan",
-      planName: "Plantain Plan",
-      amount: 16000,
-      earnings: 2000,
-      duration: "60 Days",
-      status: "Active",
-    },
-    {
-      name: "🌽 Maize Plan",
-      planName: "Maize Plan",
-      amount: 32000,
-      earnings: 4000,
-      duration: "60 Days",
-      status: "Active",
-    },
-
-    {
-      name: "🌿 Cassava Plan",
-      amount: 64000,
-      earnings: 8000,
-      duration: "90 Days",
-      status: "Coming Soon",
-    },
-    {
-      name: "🍅 Tomatoes Plan",
-      amount: 128000,
-      earnings: 16000,
-      duration: "180 Days",
-      status: "Coming Soon",
-    },
-    {
-      name: "🥜 Groundnut Plan",
-      amount: 256000,
-      earnings: 32000,
-      duration: "180 Days",
-      status: "Coming Soon",
-    },
-    {
-      name: "🍠 Yam Plan",
-      amount: 512000,
-      earnings: 64000,
-      duration: "180 Days",
-      status: "Coming Soon",
-    },
-  ];
+  {
+    name: "🌽 Maize Plan",
+    planName: "Maize Plan",
+    amount: 5000,
+    earnings: 750,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🫘 Beans Plan",
+    planName: "Beans Plan",
+    amount: 10000,
+    earnings: 1600,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🥜 Groundnut Plan",
+    planName: "Groundnut Plan",
+    amount: 30000,
+    earnings: 5100,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🍅 Tomatoes Plan",
+    planName: "Tomatoes Plan",
+    amount: 50000,
+    earnings: 9000,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🍌 Plantain Plan",
+    planName: "Plantain Plan",
+    amount: 80000,
+    earnings: 15200,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🌾 Rice Plan",
+    planName: "Rice Plan",
+    amount: 120000,
+    earnings: 24000,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🌿 Cassava Plan",
+    planName: "Cassava Plan",
+    amount: 250000,
+    earnings: 55000,
+    duration: "365 Days",
+    status: "Active",
+  },
+  {
+    name: "🍠 Yam Plan",
+    planName: "Yam Plan",
+    amount: 500000,
+    earnings: 125000,
+    duration: "365 Days",
+    status: "Active",
+  },
+];
 
   // ==========================================
   // HANDLE INVEST BUTTON

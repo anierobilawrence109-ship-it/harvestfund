@@ -27,6 +27,30 @@ const ACTIVE_PLANS = {
     dailyReturn: 4000,
     duration: 60,
   },
+
+  "Cassava Plan": {
+    amount: 64000,
+    dailyReturn: 8000,
+    duration: 90,
+  },
+
+  "Tomatoes Plan": {
+    amount: 128000,
+    dailyReturn: 16000,
+    duration: 180,
+  },
+
+  "Groundnut Plan": {
+    amount: 256000,
+    dailyReturn: 32000,
+    duration: 180,
+  },
+
+  "Yam Plan": {
+    amount: 512000,
+    dailyReturn: 64000,
+    duration: 180,
+  },
 };
 
 // ==========================================
